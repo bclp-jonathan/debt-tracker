@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCG Debt Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 15px;
+        }
+        .progress {
+            height: 25px;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+        .date-info {
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+        .amount {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .percentage {
+            font-size: 1.2em;
+            color: #198754;
+        }
+        .original-debt {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0d6efd;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="text-center mb-5">BCG Debt Tracker</h1>
+        
+        <div class="row">
+            <!-- Date Information -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Date Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="date-info">Today's Date: <span class="amount">{{ today }}</span></p>
+                        <p class="date-info">Days since August 1, 2024: <span class="amount">{{ days_since_august }}</span></p>
+                        <p class="date-info">Business days remaining until July 31, 2026: <span class="amount">{{ business_days_remaining }}</span></p>
+                        
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" 
+                                 style="width: {{ (days_since_august / 730) * 100 }}%" 
+                                 aria-valuenow="{{ (days_since_august / 730) * 100 }}" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100">
+                                {{ "%.1f"|format((days_since_august / 730) * 100) }}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Information -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Payment Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Original Debt: <span class="amount">$220,000.00</span></p>
+                        <p>Daily Payment: <span class="amount">${{ daily_payment }}</span></p>
+                        <p>Amount Paid: <span class="amount">${{ amount_paid }}</span> <span class="percentage">({{ percentage_paid }}%)</span></p>
+                        <p>Remaining Debt: <span class="amount">${{ remaining_debt }}</span></p>
+                        
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" 
+                                 style="width: {{ percentage_paid }}%" 
+                                 aria-valuenow="{{ percentage_paid }}" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100">
+                                {{ percentage_paid }}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
