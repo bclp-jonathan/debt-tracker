@@ -50,11 +50,34 @@
             color: #0d6efd;
             margin-bottom: 15px;
         }
+        .motivation-card {
+            background-color: #f8f9fa;
+            border: 2px solid #198754;
+            margin-top: 30px;
+        }
+        .motivation-text {
+            font-size: 1.2em;
+            color: #198754;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+        .current-day {
+            font-size: 1.8em;
+            color: #0d6efd;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            padding: 10px;
+            background-color: rgba(13, 110, 253, 0.1);
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container py-5">
         <h1 class="text-center mb-5">BCG Debt Tracker</h1>
+        <div class="current-day">{{ current_day }}</div>
         
         <div class="row">
             <!-- Date Information -->
@@ -102,6 +125,17 @@
                                 {{ percentage_paid }}%
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Motivation -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card motivation-card">
+                    <div class="motivation-text">
+                        "{{ daily_motivation }}"
                     </div>
                 </div>
             </div>
